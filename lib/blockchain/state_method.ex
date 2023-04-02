@@ -50,4 +50,12 @@ defmodule Ethex.Blockchain.StateMethod do
       error -> error
     end
   end
+
+  # https://ethereum.org/gu/developers/docs/apis/json-rpc/#eth_gasprice
+  def eth_gasPrice(rpc) do
+    case Utils.http_post(rpc, %{method: "eth_gasPrice", params: []}) do
+      {:ok, num} -> {:ok, Utils.from_hex(num)}
+      error -> error
+    end
+  end
 end
